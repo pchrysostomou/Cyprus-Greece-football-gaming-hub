@@ -91,5 +91,10 @@ When you first clone the repository, game images will use generic placeholders. 
 
 By using local paths in the `/public` folder, you ensure the games run flawlessly at lightning speeds without ever relying on external CDNs!
 
+### 📈 Expanding the Database
+Currently, the provided `schema.sql` and seeding scripts include a base foundation of players and teams just to demonstrate the games (e.g. *Marquinhos, Konstantelias, etc.*). **There are only a few players included by default.** 
+
+The goal of this project is to be community-driven! You can easily add more players or teams by simply adding rows to the `players` table in your Supabase database. Add your favorite team's entire roster and watch them appear in the games!
+
 ---
 *Built with ❤️ for Cypriot & Greek Football.*
