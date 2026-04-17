@@ -1,65 +1,90 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Search, MapPin, Target, CalendarDays, Grid3X3 } from "lucide-react";
 
 export default function Home() {
+  const games = [
+    {
+      title: "Guess the Logo",
+      description: "Identify the team from a blurred or cropped badge.",
+      href: "/guess-the-logo",
+      icon: Search,
+      color: "greece",
+      status: "Play Now"
+    },
+    {
+      title: "Player ID",
+      description: "Guess the player from a silhouette and progressive clues.",
+      href: "/player-id",
+      icon: Target,
+      color: "copper",
+      status: "Play Now"
+    },
+    {
+      title: "Football Bingo",
+      description: "Get 3 in a row in the Grid challenge! Orange vs Blue.",
+      href: "/football-bingo",
+      icon: Grid3X3,
+      color: "greece",
+      status: "Play Now"
+    },
+    {
+      title: "Who Am I?",
+      description: "Daily challenge: unlock clues to find the player.",
+      href: "/who-am-i",
+      icon: CalendarDays,
+      color: "copper",
+      status: "Play Now"
+    },
+    {
+      title: "Stadium Guesser",
+      description: "Identify the stadium from a single photo.",
+      href: "/stadium-guesser",
+      icon: MapPin,
+      color: "greece",
+      status: "Play Now"
+    }
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col gap-12 py-8">
+      <section className="text-center space-y-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter">
+          The Home of <span className="text-copper">Cyprus</span> & <span className="text-greece">Greek</span> Football
+        </h1>
+        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          Test your knowledge of the Super League and First Division with daily mini-games and challenges.
+        </p>
+      </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {games.map((game, idx) => (
+          <Link
+            key={idx}
+            href={game.href}
+            className={`group relative overflow-hidden rounded-2xl border border-hub-border bg-hub-card p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:border-${game.color}/50`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <div className={`absolute -right-12 -top-12 h-32 w-32 rounded-full bg-${game.color}/10 blur-3xl transition-all group-hover:bg-${game.color}/20`} />
+            <div className="relative z-10 flex flex-col h-full space-y-4">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-${game.color}/10 text-${game.color}`}>
+                <game.icon className="h-6 w-6" />
+              </div>
+              <div className="space-y-2 flex-grow">
+                <h2 className="text-2xl font-bold tracking-tight">{game.title}</h2>
+                <p className="text-slate-400 text-sm leading-relaxed">{game.description}</p>
+              </div>
+              <div className="pt-4">
+                <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+                  game.status === 'Play Now' 
+                    ? 'bg-copper/20 text-copper ring-1 ring-inset ring-copper/30' 
+                    : 'bg-slate-800 text-slate-400 ring-1 ring-inset ring-slate-700'
+                }`}>
+                  {game.status}
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
